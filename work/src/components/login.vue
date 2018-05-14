@@ -1,52 +1,64 @@
 <template>
-  <div style="width:100%;height:100%;background:url('../../static/1.jpeg') no-repeat;">
-    <div class="login-wrap" v-show="showLogin">
-      <h3>登录</h3>
-      <input type="text" placeholder="请输入用户名" v-model="username">
-      <input type="password" placeholder="请输入密码" v-model="password">
-      <button @click="login">登录</button>
-      <span class="link" @click="toRegister">没有账号？马上注册</span>
+    <div style="width:100%;height:100%;">
+        <v-background ref="background"></v-background>
+        <div class="login-wrap" v-show="showLogin">
+            <h3>登录</h3>
+            <input type="text" placeholder="请输入登录邮箱" v-model="email">
+            <input type="password" placeholder="请输入密码" v-model="password">
+            <button @click="login">登录</button>
+            <span class="link"   @click="toRegister">没有账号？马上注册</span>
+        </div>
+        <div class="register-wrap" v-show="showRegister">
+            <h3>注册</h3>
+            <input type="text" placeholder="请输入用户名" v-model="newUsername">
+            <input type="text" placeholder="请输入登录邮箱" v-model="newemail">
+            <input type="password" placeholder="请输入密码" v-model="newPassword">
+            <input type="password" placeholder="请确认密码" v-model="conPassword">
+            <button @click="register">注册</button>
+            <span class="link" v-on:click="ToLogin">已有账号？马上登录</span>
+        </div>
     </div>
-    <div class="register-wrap" v-show="showRegister">
-      <h3>注册</h3>
-      <input type="text" placeholder="请输入用户名" v-model="newUsername">
-      <input type="password" placeholder="请输入密码" v-model="newPassword">
-      <input type="password" placeholder="请确认密码" v-model="conPassword">
-      <button v-on:click="register">注册</button>
-      <span class="link" v-on:click="ToLogin">已有账号？马上登录</span>
-    </div>
-  </div>
 </template>
 
 <script>
 import { Toast } from "mint-ui";
 import { passenger as passengerApi } from "../config/request";
+import background from './background.vue'
   export default{
     data(){
       return{
         showLogin: true,
         showRegister: false,
         tishi: '',
-        username: '',
+        email: '',
         password: '',
         newUsername: '',
+        newemail: '',
         newPassword: '',
         conPassword: '',
       }
     },
     mounted(){
-        
+        console.log('1')
+        setTimeout(()=>{
+            this.$refs.background.start();
+        },100)
     },
     methods: {
       login(){
-        if(this.username == "" || this.password == ""){
+        if(this.email == "" || this.password == ""){
           Toast({
                 message: '请输入账号或者密码！',
                 duration : 1500
             });
+        }else if(!(/^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+\.(?:com|cn)$/.test(this.email))){
+            Toast({
+                message: '非法的邮箱！',
+                duration : 1000
+            });
         }else{
           let option = {
-              username:this.username,
+              email:this.email,
               password:this.password
               }
             passengerApi.login.call(
@@ -61,7 +73,6 @@ import { passenger as passengerApi } from "../config/request";
                             console.log(data)
                         let userinfo = {
                             username: data.data[0].username,
-                            password: data.data[0].password,
                             role: data.data[0].role
                         }    
                         setTimeout(function(){
@@ -87,14 +98,15 @@ import { passenger as passengerApi } from "../config/request";
         this.showLogin = false;
       },
       register(){
-        if(this.newUsername == "" || this.newPassword == "" || this.conPassword == ""){
+        //   console.log('1')
+        if(this.newUsername == "" || this.newPassword == "" || this.conPassword == "" || this.newemail ==""){
           Toast({
-                message: '请输入账号或者密码！',
+                message: '请输入所有必填信息！',
                 duration : 1500
             });
-        }else if(this.newUsername.length<6){
+        }else if(!(/^([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|_|.]?)*[a-zA-Z0-9]+\.(?:com|cn)$/.test(this.newemail))){
             Toast({
-                message: '用户名必须大于6个字符！',
+                message: '非法的邮箱！',
                 duration : 1000
             });
         }else if(this.newPassword.length<6){
@@ -111,16 +123,18 @@ import { passenger as passengerApi } from "../config/request";
         }else{
           let option = {
               username: this.newUsername,
-              password: this.newPassword
+              password: this.newPassword,
+              email: this.newemail
             }
+            console.log(option)
               passengerApi.register.call(
                 this,
                 option,
                 data => {
                     console.log(data)
-                    if(data.exit){
+                    if(data.code){
                          Toast({
-                        message: '该用户名已被注册！',
+                        message: data.data,
                         duration : 1000
                         });
                     }else{
@@ -147,7 +161,10 @@ import { passenger as passengerApi } from "../config/request";
         this.showRegister = false
         this.showLogin = true
       }
-    }
+    },
+    components: {
+		"v-background": background,
+	}
   }
 </script>
 
@@ -157,42 +174,55 @@ import { passenger as passengerApi } from "../config/request";
     position: absolute;
     top: 25%;
     left: 16%;
+    z-index: 999;
+    color: #fff;
+    font-family: "\5FAE\8F6F\96C5\9ED1";
+    h3{
+        font-size: 20px;
+        margin: 10px auto 20px
+    }
+    .link{
+        text-decoration: underline  
+    }
+
+    input{
+        display:block; 
+        width:250px; height:40px; 
+        line-height:40px; margin:0 auto; 
+        margin-bottom: 20px; 
+        outline:none; 
+        border:1px solid #888; 
+        padding:10px; 
+        box-sizing:border-box;
+    }
+
+    p{
+        color:red;
+    }
+
+    button{
+        display:block; 
+        width:250px; 
+        height:40px; 
+        line-height: 40px; 
+        margin:0 auto; 
+        border:none; 
+        background-color:#41b883; 
+        color:#fff; 
+        font-size:16px; 
+        margin-bottom:20px;
+    }
+    span{
+        cursor:pointer;
+    }
+    span:hover{
+        color:#41b883;
+    }
 }
-h3{
-    margin: 10px auto 20px
-}
-input{
-    display:block; 
-    width:250px; height:40px; 
-    line-height:40px; margin:0 auto; 
-    margin-bottom: 20px; 
-    outline:none; 
-    border:1px solid #888; 
-    padding:10px; 
-    box-sizing:border-box;
-}
-p{
-    color:red;
-}
-button{
-    display:block; 
-    width:250px; 
-    height:40px; 
-    line-height: 40px; 
-    margin:0 auto; 
-    border:none; 
-    background-color:#41b883; 
-    color:#fff; 
-    font-size:16px; 
-    margin-bottom:5px;
-}
-span{
-    cursor:pointer;
-}
-span:hover{
-    color:#41b883;
-}
-.link{
-    text-decoration: underline
+
+.register-wrap{
+    position: absolute;
+    top: 20%;
+    left: 16%;
 }
 </style>
