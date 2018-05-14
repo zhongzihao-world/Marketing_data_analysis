@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;height:100%;">
+  <div style="width:100%;height:100%;background:url('../../static/1.jpeg') no-repeat;">
     <div class="login-wrap" v-show="showLogin">
       <h3>登录</h3>
       <input type="text" placeholder="请输入用户名" v-model="username">
