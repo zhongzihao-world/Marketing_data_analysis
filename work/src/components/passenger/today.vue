@@ -245,9 +245,20 @@ export default {
           formatter: "{b} {c}人 ({d}%)",
         //   toolbox: { feature: {saveAsImage: {show: true}  } },
         },
+        //图片保存按钮
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              excludeComponents: ["toolbox"],
+              pixelRatio: 2
+            }
+          }
+        },
         legend: {
           orient: "vertical",
-          x: "right",
+          x: "left",
           data: [
             this.stoptimedata[0].name,
             this.stoptimedata[1].name,
@@ -294,9 +305,20 @@ export default {
           trigger: "item",
           formatter: "{b}<br/> {c}人 ({d}%)"
         },
+        //图片保存按钮
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              excludeComponents: ["toolbox"],
+              pixelRatio: 2
+            }
+          }
+        },
         legend: {
           orient: "vertical",
-          x: "right",
+          x: "left",
           data: [this.mandata[0].name, this.mandata[1].name]
         },
         series: [

@@ -101,7 +101,7 @@ export default {
       d.setDate(d.getDate() + days);
       var m = d.getMonth() + 1;
       return d.getFullYear() + "-" + m + "-" + d.getDate();
-    };
+    }
     return {
       startTime: new Date().Format("2018-01-01"),
       endTime: new Date().Format("yyyy-MM-dd"),
@@ -149,7 +149,6 @@ export default {
   },
   created() {},
   methods: {
-
     open(picker) {
       this.$refs["picker"].open();
       this.picker = picker;
@@ -166,7 +165,7 @@ export default {
       }
       this.getData({
         start_date: this.startTime,
-        end_date: this.endTime,
+        end_date: this.endTime
       });
     },
     getData(option) {
@@ -175,7 +174,7 @@ export default {
         this,
         option,
         data => {
-            // console.log(data)
+          // console.log(data)
           if (data.code) {
             return;
           }
@@ -183,28 +182,28 @@ export default {
           //顶层数据
           this.man = data.count_data.peopledata.man_count || 0;
           this.woman = data.count_data.peopledata.woman_count || 0;
-          this.people = data.count_data.peopledata.people ||0;
-          this.day = data.count_data.peopledata.day_count ||0;
-          this.money = data.count_data.money.money_count ||0;
-          
+          this.people = data.count_data.peopledata.people || 0;
+          this.day = data.count_data.peopledata.day_count || 0;
+          this.money = data.count_data.money.money_count || 0;
+
           //年龄组成饼状图
           this.age.showLoading();
           this.agebar.showLoading();
           let age_time = data.count_data.stay_time;
-            for (let i = 0; i < this.agedata.length; i++) {
-                const element = this.agedata[i];
-                for (let key in age_time) {
-                if (element.name == key) {
-                    this.agedata[i].value = age_time[key];
-                    this.agedata[i].value = age_time[key];
-                }
-                }
+          for (let i = 0; i < this.agedata.length; i++) {
+            const element = this.agedata[i];
+            for (let key in age_time) {
+              if (element.name == key) {
+                this.agedata[i].value = age_time[key];
+                this.agedata[i].value = age_time[key];
+              }
             }
+          }
           this.drawage();
           this.drawagebar();
           this.agebar.hideLoading();
           this.age.hideLoading();
-          
+
           //营收额柱状图
           let money = data.count_data.list_money;
           this.list_money_x = [];
@@ -217,10 +216,6 @@ export default {
           this.drawmoney();
 
           //男女顾客折线图
-
-
-
-
         },
         err => {
           console.info(err);
@@ -231,7 +226,7 @@ export default {
         this,
         Object.assign({ type: 0 }, option),
         data => {
-            console.log(data)
+          console.log(data);
           if (data.code) {
             return setTimeout(() => {
               Indicator.close();
@@ -267,6 +262,17 @@ export default {
           data: ["男顾客人数", "女顾客人数"],
           left: "left"
         },
+        //图片保存按钮
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              excludeComponents: ["toolbox"],
+              pixelRatio: 2
+            }
+          }
+        },
         grid: {
           left: "1%",
           right: "7%",
@@ -281,11 +287,6 @@ export default {
             label: {
               backgroundColor: "#6a7985"
             }
-          },
-          toolbox: { 
-              feature: {
-                  saveAsImage: {show: true}  
-              } 
           }
         },
         xAxis: [
@@ -348,6 +349,17 @@ export default {
             type: "shadow"
           }
         },
+        //图片保存按钮
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              excludeComponents: ["toolbox"],
+              pixelRatio: 2
+            }
+          }
+        },
         grid: {
           left: "3%",
           right: "7%",
@@ -398,9 +410,20 @@ export default {
           trigger: "item",
           formatter: "{b}<br/> {c}人 ({d}%)"
         },
+        //图片保存按钮
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              excludeComponents: ["toolbox"],
+              pixelRatio: 2
+            }
+          }
+        },
         legend: {
           orient: "vertical",
-          x: "right",
+          x: "left",
           data: this.agedata
         },
         series: [
@@ -437,6 +460,17 @@ export default {
           trigger: "axis",
           axisPointer: {
             type: "shadow"
+          }
+        },
+        //图片保存按钮
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              excludeComponents: ["toolbox"],
+              pixelRatio: 2
+            }
           }
         },
         grid: {
@@ -503,10 +537,7 @@ export default {
       document.getElementById("customerlineflow"),
       "macarons"
     );
-    this.age = this.$echarts.init(
-      document.getElementById("age"),
-      "macarons"
-    );
+    this.age = this.$echarts.init(document.getElementById("age"), "macarons");
     this.agebar = this.$echarts.init(
       document.getElementById("agebar"),
       "macarons"
@@ -525,10 +556,10 @@ export default {
       d.setDate(d.getDate() + days);
       var m = d.getMonth() + 1;
       return d.getFullYear() + "-" + m + "-" + d.getDate();
-    };
+    }
     this.getData({
       start_date: new Date().Format("2018-01-01"),
-      end_date: new Date().Format("yyyy-MM-dd"),
+      end_date: new Date().Format("yyyy-MM-dd")
     });
   }
 };
