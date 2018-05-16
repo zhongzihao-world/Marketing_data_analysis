@@ -242,7 +242,8 @@ export default {
       this.stoptimeOption = {
         tooltip: {
           trigger: "item",
-          formatter: "{b} {c}人 ({d}%)"
+          formatter: "{b} {c}人 ({d}%)",
+        //   toolbox: { feature: {saveAsImage: {show: true}  } },
         },
         legend: {
           orient: "vertical",

@@ -66,7 +66,7 @@ const passenger = {
         ajax.call(this, 'get', "http://localhost:9000/customerhot/customerdata", data, fn, errFn);
     },
 
-    //服务器
+    // // 服务器
     // login(data, fn, errFn) {
     //     ajax.call(this, 'post', "http://193.112.112.22:9000/login/login", data, fn, errFn);
     // },

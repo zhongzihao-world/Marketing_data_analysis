@@ -37,6 +37,7 @@
 <script>
 import { Toast, Indicator } from "mint-ui";
 import { passenger as passengerApi } from "../../config/request.js";
+import company from '../../assets/img/company.jpg'
 export default {
   data() {
     return {
@@ -164,7 +165,7 @@ export default {
           if(1){
               let back_x = Number(element.width) * (this.picture_x / this.size_x);
               let back_y = Number(element.height) * ((this.picture_y-60) / this.size_y);
-              console.log(element.Img_src)
+            //   console.log(element.Img_src)
               seriesData.push({
                 name: 'pm2.5',
                   type: 'scatter',
@@ -206,7 +207,7 @@ export default {
           this.picture_y=(element.height*this.picture_x)/element.width + 60;
           this.size_x=Number(element.width);
           this.size_y=Number(element.height);
-          this.bgurl=element.Img_src;
+          this.bgurl= company;
           this.area_name=element.name || '';
       }
         passengerApi.customerdata.call(this,option,data => {

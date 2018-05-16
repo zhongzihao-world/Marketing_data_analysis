@@ -281,6 +281,11 @@ export default {
             label: {
               backgroundColor: "#6a7985"
             }
+          },
+          toolbox: { 
+              feature: {
+                  saveAsImage: {show: true}  
+              } 
           }
         },
         xAxis: [
