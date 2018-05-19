@@ -31,4 +31,20 @@ exports.select = Promise.coroutine(function*(req, res, next) {
     } finally {
         conn.release();
     }
-  });
+});
+
+exports.delcustomer_data = Promise.coroutine(function*(req, res, next) {
+    let conn;
+    try {
+        conn = yield util.getConnect();
+        const data = yield customerinfoModule.delcustomer_data(conn, req.body);
+        if(data.protocol41){
+            return res.json(util.success({data}));            
+        }else{return res.json(util.fail({data}));}
+    } catch (error) {
+        logger.error(error.stack);
+        return res.json(config.message.error);
+    } finally {
+        conn.release();
+    }
+});

@@ -39,7 +39,7 @@
                         <td>暂无顾客信息！</td>
                     </tr>
                     <tr v-for="_data in customer_data">
-                        <td style="width:34vw;">{{_data.customername}}</td>
+                        <td style="width:34vw;" @click='delcustomer_data(_data)'>{{_data.customername}}</td>
                         <td style="width:20vw;" >{{_data.time}}</td>
                         <td style="width:20vw;">{{_data.sex}}</td>
                         <td style="width:20vw;"><button @click="getinfo(_data)">查看详情</button></td>
@@ -54,6 +54,11 @@
                         <span @click="quit"><返回</span>
                         <span>详细信息</span>
                     </div>                  
+                </div>
+                <div class="panel">
+                    <div class="panel_tit">
+                        <h4>顾客详细信息</h4>
+                    </div>
                 </div>
                 <div class="customerinfo">
                     <div class="customerinfo_list">名字:&nbsp;&nbsp;{{customerinfo.name}}</div>
@@ -70,7 +75,7 @@
 </template>
 
 <script>
-import { Toast, Indicator } from 'mint-ui';
+import { Toast, Indicator,MessageBox } from 'mint-ui';
 import { passenger as passengerApi } from "../../config/request.js";
 export default {
     data() {
@@ -161,6 +166,29 @@ export default {
         },
         quit(){
             this.popupcustometinfo=false;       
+        },
+        delcustomer_data(_data){
+            // console.log(_data)
+             MessageBox.confirm('', {
+                message: '确认删除此顾客信息？',
+                title: '提示',
+                cancelButtonClass:'cancelButton',
+                confirmButtonClass:'confirmButton',
+                cancelButtonText: '取消',
+                confirmButtonText: '确定',
+            }).then( action  => {
+              let option = {
+                  id: _data.id
+                  };
+                passengerApi.delcustomer_data.call(this,option, data =>{
+                    if(data.code){
+                          console.log(data.message);
+                    }else{
+                          this.getData();                          
+                          Toast({message: '操作成功!', duration: '1000'});
+                    }  
+                }, () =>{console.info("网络繁忙，请求失败!!");})    
+            }).catch(err => {})
         }
     },
     created() {
@@ -269,10 +297,29 @@ export default {
 .customerinfo{
     // text-align: center;
     width: 100%;
-    padding: 10%;
+    // padding: 10%;
     .customerinfo_list{
-        width: 60%;
-        margin: 10px auto 10px auto;
+        width: 100%;
+        padding: 2%;
+        // margin: 10px auto 10px auto;
+    }
+}
+.panel {
+    position: relative;
+    background: #edf8fe;
+    // height: 100px;
+    //     padding: 10px 20px;
+        color: #59bfff;
+    .panel_tit {
+        position: relative;
+        border-radius: 5px 5px 0 0;
+        
+        padding: 5px 5px;
+        color: #59bfff;
+        h4{
+            font-size: 18px;
+            // font-weight: 200;
+        }
     }
 }
 </style>

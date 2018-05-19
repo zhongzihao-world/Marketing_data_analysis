@@ -39,7 +39,7 @@
           </div>
       </div>     
       <div class="passflow_list">
-          <div class="passflow_list_img"><img src="../../assets/img/today_list3.png" style="width:25px"></div>
+          <div class="passflow_list_img"><img src="../../assets/img/today_list1.png" style="width:25px"></div>
             <div class="passflow_list_lf">
               <span><p>总女顾客</p></span>
               <p>共统计{{day}}天</p>
@@ -49,7 +49,7 @@
           </div>
       </div>
       <div class="passflow_list">
-          <div class="passflow_list_img"><img src="../../assets/img/today_list2.png" style="width:25px"></div>
+          <div class="passflow_list_img"><img src="../../assets/img/today_list1.png" style="width:25px"></div>
             <div class="passflow_list_lf">
               <span><p>总顾客</p></span>
               <p>共统计{{day}}天</p>

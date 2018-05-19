@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="today_list">
-            <div class="today_list_img"><img src="../../assets/img/today_list4.png" style="width:25px"></div>
+            <div class="today_list_img"><img src="../../assets/img/today_list1.png" style="width:25px"></div>
               <div class="today_list_lf">
                 <span><p>今月女顾客人数</p></span>
                 <p>同比上月{{woman_rate > 0 ? '上升' : '下降'}}<i :class="woman_rate > 0 ? 'icon-on' : 'icon-off' "></i>&nbsp;<span :style="woman_rate > 0 ? 'color:green' : 'color : red'">{{Math.abs(woman_rate)}}%</span></p>
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="today_list">
-            <div class="today_list_img"><img src="../../assets/img/today_list3.png" style="width:25px"></div>
+            <div class="today_list_img"><img src="../../assets/img/today_list1.png" style="width:25px"></div>
               <div class="today_list_lf">
                 <span><p>当月顾客总数</p></span>
                 <p>同比上月{{totalCustomer_rate > 0 ? '上升' : '下降'}}<i :class="totalCustomer_rate > 0 ? 'icon-on' : 'icon-off' "></i>&nbsp;<span :style="totalCustomer_rate > 0 ? 'color:green' : 'color : red'">{{Math.abs(totalCustomer_rate)}}%</span></p>
@@ -52,7 +52,7 @@
             </div>
           </div>
           <div class="today_list">
-            <div class="today_list_img"><img src="../../assets/img/today_list5.png" style="width:25px"></div>
+            <div class="today_list_img"><img src="../../assets/img/today_list3.png" style="width:25px"></div>
               <div class="today_list_lf">
                 <span><p>当月人均停留时间</p></span>
                 <p>对比昨日{{stay_time_rate > 0 ? '上升' : '下降'}}<i :class="stay_time_rate > 0 ? 'icon-on' : 'icon-off' "></i>&nbsp;<span :style="stay_time_rate > 0 ? 'color:green' : 'color : red'">{{Math.abs(stay_time_rate)}}%</span></p>
@@ -62,7 +62,7 @@
             </div>
           </div> 
           <div class="today_list">
-            <div class="today_list_img"><img src="../../assets/img/today_list2.png" style="width:25px"></div>
+            <div class="today_list_img"><img src="../../assets/img/today_list4.png" style="width:25px"></div>
               <div class="today_list_lf">
                 <span><p>当月营收额</p></span>
                 <p>同比上月{{money_rate > 0 ? '上升' : '下降'}}<i :class="money_rate > 0 ? 'icon-on' : 'icon-off' "></i>&nbsp;<span :style="money_rate > 0 ? 'color:green' : 'color : red'">{{Math.abs(money_rate)}}%</span></p>

@@ -2,14 +2,14 @@
     <div style="width:100%;height:100%;">
         <v-background ref="background"></v-background>
         <div class="login-wrap" v-show="showLogin">
-            <h3>登录</h3>
+            <h3>欢迎登录</h3>
             <input type="text" placeholder="请输入登录邮箱" v-model="email">
             <input type="password" placeholder="请输入密码" v-model="password">
             <button @click="login">登录</button>
             <span class="link"   @click="toRegister">没有账号？马上注册</span>
         </div>
         <div class="register-wrap" v-show="showRegister">
-            <h3>注册</h3>
+            <h3>欢迎注册</h3>
             <input type="text" placeholder="请输入用户名" v-model="newUsername">
             <input type="text" placeholder="请输入登录邮箱" v-model="newemail">
             <input type="password" placeholder="请输入密码" v-model="newPassword">
@@ -39,7 +39,7 @@ import background from './background.vue'
       }
     },
     mounted(){
-        console.log('1')
+        // console.log('1')
         setTimeout(()=>{
             this.$refs.background.start();
         },100)
