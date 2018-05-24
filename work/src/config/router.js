@@ -1,13 +1,9 @@
 export default [{
     path: '/',
     redirect: to => {
-        return 'welcome';
+        return 'login';
     },
 },{
-    path: '/welcome',
-    component: resolve => require(['../components/welcome.vue'], resolve),
-    meta: { isfade: true },
-}, {
     path: '/login',
     component: resolve => require(['../components/login.vue'], resolve),
     meta: { isfade: true },

@@ -11,7 +11,7 @@
                         <div class="menu_logo"><img src="../../assets/img/img_.png" style="width:76px"></div>
                         <div class="menu_txt">
                           <p>{{userName}}</p>
-                          <p style="font-size:2.5vw;">欢迎来到科数云地产营销大数据服务平台</p>
+                          <p style="font-size:2.5vw;">欢迎来到营销数据服务平台</p>
                         </div>                      
                       </div>
                     </div>
